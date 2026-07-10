@@ -1,0 +1,42 @@
+{
+  "name": "david-md",
+  "version": "0.1.0",
+  "description": "Opinionated agent workflows from David.md, starting with Fable Advisor.",
+  "author": {
+    "name": "David Marquez",
+    "url": "https://david.md"
+  },
+  "homepage": "https://david.md",
+  "repository": "https://github.com/dayvough/david.md",
+  "license": "MIT",
+  "keywords": [
+    "codex",
+    "claude-code",
+    "fable",
+    "advisor",
+    "planning",
+    "code-review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "David.md",
+    "shortDescription": "Agent workflows, starting with Fable Advisor",
+    "longDescription": "David.md packages practical, inspectable agent workflows for Codex. Its first skill, Fable Advisor, runs Claude Fable through the local Claude Code harness as a verified read-only planning and review advisor. It gives Fable broad access to repository search, web research, read-only shell commands, and explicitly approved read tools while blocking side effects.",
+    "developerName": "David Marquez",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Interactive",
+      "Read"
+    ],
+    "websiteURL": "https://david.md",
+    "defaultPrompt": [
+      "Ask Fable to review this plan before implementation",
+      "Use Fable as a second-opinion reviewer on this diff",
+      "Have Fable challenge this architecture using repo evidence"
+    ],
+    "brandColor": "#171717",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg",
+    "screenshots": []
+  }
+}

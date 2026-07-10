@@ -1,0 +1,20 @@
+{
+  "name": "david-md",
+  "interface": {
+    "displayName": "David.md"
+  },
+  "plugins": [
+    {
+      "name": "david-md",
+      "source": {
+        "source": "local",
+        "path": "./plugins/david-md"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
