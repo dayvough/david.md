@@ -43,8 +43,6 @@ class FableAdvisorTests(unittest.TestCase):
                     str(root),
                     "--log-dir",
                     str(root / "logs"),
-                    "--profile",
-                    "linear-read",
                 ],
                 input="Review this read-only change.",
                 text=True,
@@ -66,9 +64,10 @@ class FableAdvisorTests(unittest.TestCase):
             self.assertIn("Edit", disallowed)
             self.assertIn("Write", disallowed)
             allowed = args[args.index("--allowedTools") + 1]
-            self.assertIn("ToolSearch", allowed)
-            self.assertIn("mcp__claude_ai_Linear__get_issue", allowed)
-            self.assertNotIn("Bash(", allowed)
+            self.assertEqual(
+                set(allowed.split(",")),
+                {"Read", "Glob", "Grep", "WebSearch", "WebFetch"},
+            )
             return completed
 
     def test_success_returns_only_fable_result_on_stdout(self) -> None:
@@ -79,8 +78,7 @@ class FableAdvisorTests(unittest.TestCase):
                     "subtype": "init",
                     "session_id": "session-1",
                     "model": "claude-fable-5",
-                    "tools": ["Read", "ToolSearch"],
-                    "mcp_servers": [],
+                    "tools": ["Read"],
                 },
                 {
                     "type": "assistant",
@@ -112,7 +110,6 @@ class FableAdvisorTests(unittest.TestCase):
                     "session_id": "session-2",
                     "model": "claude-fable-5",
                     "tools": [],
-                    "mcp_servers": [],
                 },
                 {
                     "type": "assistant",
@@ -143,7 +140,6 @@ class FableAdvisorTests(unittest.TestCase):
                     "session_id": "session-3",
                     "model": "claude-fable-5",
                     "tools": [],
-                    "mcp_servers": [],
                 },
                 {
                     "type": "result",
@@ -170,7 +166,6 @@ class FableAdvisorTests(unittest.TestCase):
                     "session_id": "session-read-denial",
                     "model": "claude-fable-5",
                     "tools": ["Read"],
-                    "mcp_servers": [],
                 },
                 {
                     "type": "result",
@@ -197,7 +192,6 @@ class FableAdvisorTests(unittest.TestCase):
                     "session_id": "session-4",
                     "model": "claude-fable-5",
                     "tools": [],
-                    "mcp_servers": [],
                 }
             ],
             2,

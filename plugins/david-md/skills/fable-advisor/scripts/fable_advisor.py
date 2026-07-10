@@ -21,12 +21,11 @@ BASE_READ_TOOLS = (
     "Read",
     "Glob",
     "Grep",
-    "ToolSearch",
     "WebSearch",
     "WebFetch",
 )
 
-BUILTIN_READ_TOOLS = ("Read", "Glob", "Grep", "ToolSearch", "WebSearch", "WebFetch", "Bash")
+BUILTIN_READ_TOOLS = ("Read", "Glob", "Grep", "WebSearch", "WebFetch", "Bash")
 
 DISALLOWED_TOOLS = (
     "Edit",
@@ -48,35 +47,12 @@ DISALLOWED_TOOLS = (
     "TaskStop",
 )
 
-PROFILE_TOOLS = {
-    "linear-read": (
-        "mcp__claude_ai_Linear__get_issue",
-        "mcp__claude_ai_Linear__get_issue_status",
-        "mcp__claude_ai_Linear__list_issue_statuses",
-        "mcp__claude_ai_Linear__list_issue_labels",
-        "mcp__claude_ai_Linear__get_document",
-        "mcp__claude_ai_Linear__get_diff",
-        "mcp__claude_ai_Linear__get_diff_threads",
-    ),
-    "railway-read": (
-        "mcp__railway__environment_status",
-        "mcp__railway__get_service_config",
-        "mcp__railway__domain_status",
-        "mcp__railway__private_network_status",
-    ),
-}
-
-
 def unique(items: Iterable[str]) -> list[str]:
     return list(dict.fromkeys(items))
 
 
 def effective_read_tools(args: argparse.Namespace) -> list[str]:
-    tools = list(BASE_READ_TOOLS)
-    for profile in args.profile:
-        tools.extend(PROFILE_TOOLS[profile])
-    tools.extend(args.allow_tool)
-    return unique(tools)
+    return unique(BASE_READ_TOOLS)
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -139,15 +115,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser.add_argument("prompt", nargs="?", help="Prompt text; stdin is preferred")
     parser.add_argument("--prompt-file", type=Path, help="Read the prompt from a file")
     parser.add_argument("--cwd", type=Path, default=Path.cwd())
-    parser.add_argument(
-        "--profile", action="append", choices=sorted(PROFILE_TOOLS), default=[]
-    )
-    parser.add_argument(
-        "--allow-tool",
-        action="append",
-        default=[],
-        help="Pre-approve one exact additional read-only tool name",
-    )
     parser.add_argument("--add-dir", action="append", type=Path, default=[])
     parser.add_argument("--resume", help="Resume a prior Claude Code session ID")
     parser.add_argument(
@@ -217,14 +184,10 @@ def build_command(args: argparse.Namespace, session_id: str) -> list[str]:
 
 def emit_progress(event: dict[str, Any]) -> None:
     if event.get("type") == "system" and event.get("subtype") == "init":
-        servers = ",".join(
-            f"{server.get('name')}:{server.get('status')}"
-            for server in event.get("mcp_servers", [])
-        ) or "none"
         print(
             "[fable-advisor] "
             f"session={event.get('session_id')} model={event.get('model')} "
-            f"tools={len(event.get('tools', []))} mcp={servers}",
+            f"tools={len(event.get('tools', []))}",
             file=sys.stderr,
             flush=True,
         )

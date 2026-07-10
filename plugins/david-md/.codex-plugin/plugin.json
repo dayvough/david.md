@@ -1,6 +1,6 @@
 {
   "name": "david-md",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Opinionated agent workflows from David.md, starting with Fable Advisor.",
   "author": {
     "name": "David Marquez",
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "David.md",
     "shortDescription": "Agent workflows, starting with Fable Advisor",
-    "longDescription": "David.md packages practical, inspectable agent workflows for Codex. Its first skill, Fable Advisor, runs Claude Fable through the local Claude Code harness as a verified read-only planning and review advisor. It gives Fable broad access to repository search, web research, read-only shell commands, and explicitly approved read tools while blocking side effects.",
+    "longDescription": "David.md packages practical, inspectable agent workflows for Codex. Its first skill, Fable Advisor, runs Claude Fable through the local Claude Code harness as a verified read-only planning and review advisor. It gives Fable access to repository reading and search, web research, and read-only shell commands while blocking side effects.",
     "developerName": "David Marquez",
     "category": "Developer Tools",
     "capabilities": [
