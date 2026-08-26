@@ -1,6 +1,6 @@
 ---
 name: fable-56-parallel
-description: Run the same task through Claude Fable 5 High and GPT-5.6 Sol High concurrently, then present both complete outputs verbatim without synthesis, commentary, or a recommendation. Use only when the user explicitly invokes this skill or explicitly asks for a parallel Fable High and 5.6 High comparison with both raw responses.
+description: Ask Claude Fable 5 High and GPT-5.6 Sol High the same read-only question at the same time, then return both complete answers exactly as written. Use only when the user explicitly invokes this skill or asks for both raw responses.
 ---
 
 # Fable + 5.6 Parallel

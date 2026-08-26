@@ -1,6 +1,6 @@
 ---
 name: feynman
-description: Explain complex, technical, or ambiguous ideas from first principles in plain language without losing rigor. Use when the user asks for a Feynman-style explanation, says "explain like I am a beginner," asks what something really means, appears confused by jargon, or wants a status, decision, system, failure, or tradeoff made intuitively understandable.
+description: Explain a difficult idea by starting with basic facts, building the cause-and-effect chain, and showing the limits. Use when the user asks for a Feynman-style explanation, a beginner explanation, or the plain meaning of a status, decision, system, failure, or tradeoff.
 ---
 
 # Feynman

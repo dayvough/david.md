@@ -19,7 +19,7 @@ SKILL = SCRIPT.parent.parent / "SKILL.md"
 class FableTests(unittest.TestCase):
     def test_skill_persists_codex_execution_profile(self) -> None:
         skill = SKILL.read_text(encoding="utf-8")
-        self.assertIn("## Persistent Codex execution profile", skill)
+        self.assertIn("## Required Codex launcher settings", skill)
         self.assertIn('sandbox_permissions: "require_escalated"', skill)
         self.assertIn(
             '["python3", "<fable-skill-dir>/scripts/fable.py"]',

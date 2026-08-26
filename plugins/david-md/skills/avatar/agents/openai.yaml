@@ -1,4 +1,4 @@
 interface:
   display_name: "Avatar"
-  short_description: "Practical lenses for building and shipping"
-  default_prompt: "Use $avatar to make this product problem concrete, choose the right lenses, and recommend the smallest next move."
+  short_description: "Make a product decision concrete"
+  default_prompt: "Use $avatar to make this product problem concrete, ask only the questions that change the decision, and recommend the smallest next move."

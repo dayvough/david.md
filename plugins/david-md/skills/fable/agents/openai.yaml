@@ -1,7 +1,7 @@
 interface:
   display_name: "Fable"
-  short_description: "Run bounded Fable work with audited Opus fallback"
-  default_prompt: "Use $fable for this bounded task, with the mode determined by my request and Opus 5 only for an audited Fable boundary."
+  short_description: "Run Fable with explicit task limits"
+  default_prompt: "Use $fable for this task with explicit limits. Use Opus 5 only after a recorded Fable model limit."
 
 policy:
   allow_implicit_invocation: false

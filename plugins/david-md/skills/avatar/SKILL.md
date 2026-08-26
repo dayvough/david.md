@@ -1,20 +1,11 @@
 ---
 name: avatar
-description: >-
-  Apply Avatar, a compact set of proven mental models for founder work,
-  including product strategy, idea validation, prioritization, MVP scoping,
-  user experience, product models, architecture, implementation, debugging,
-  specifications, naming, dashboards, and shipping decisions. Use when the user
-  invokes `$avatar`, asks what one or more great thinkers would examine, wants a
-  concrete Feynman-style explanation, needs vague product language made
-  buildable, is overengineering, or wants the smallest useful next move. Route
-  the problem to only the relevant lenses instead of producing a generic panel
-  of opinions.
+description: Use one to three sets of questions associated with specific thinkers to make a founder or product problem concrete and choose the smallest useful next move. Use when the user invokes $avatar, asks what great thinkers would examine, needs vague product language made buildable, or is overengineering.
 ---
 
 # Avatar
 
-Use Avatar to select distinguished thinkers as decision lenses, not as characters to imitate. Apply their documented reasoning habits without fabricating quotations, biography, or theatrical dialogue.
+A decision lens is a set of questions used to examine one choice. Avatar selects one to three lenses associated with distinguished thinkers. Apply their documented reasoning habits without imitating them or inventing quotations.
 
 ## Run the method
 
@@ -68,4 +59,4 @@ When project status is part of the request, also give owner and done condition. 
 
 ## Extend carefully
 
-Do not add thinkers for novelty. Propose a new Avatar only when repeated work reveals a decision domain the current set handles poorly, such as negotiation, probability, sales, organizational design, or operations. Define the missing domain, the distinctive questions the new lens contributes, and what the existing Avatars cannot cover. Ask David before making the addition permanent.
+Do not add thinkers for novelty. Propose a new Avatar only when repeated work reveals a decision domain the current set handles poorly, such as negotiation, probability, sales, organizational design, or operations. Define the missing domain, the distinctive questions the new lens contributes, and what the existing Avatars cannot cover. Ask the user before making the addition permanent.

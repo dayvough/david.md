@@ -1,6 +1,6 @@
 ---
 name: bruh
-description: Explains or restates content with ASD-STE100 Simplified Technical English principles. Use when the user says "Bruh," asks for STE, or asks for an explanation in ASD-STE100 Simplified Technical English.
+description: Explain or rewrite content with short sentences, common words, and one instruction per sentence. Use when the user says "Bruh," asks for Simplified Technical English, or names ASD-STE100.
 ---
 
 # Bruh
