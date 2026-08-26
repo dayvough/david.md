@@ -1,0 +1,4 @@
+interface:
+  display_name: "Bruh"
+  short_description: "Rewrite with clear Simplified Technical English"
+  default_prompt: "Use $bruh to explain this with short sentences, controlled words, and a clear logical order."

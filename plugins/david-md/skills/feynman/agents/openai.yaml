@@ -1,0 +1,4 @@
+interface:
+  display_name: "Feynman"
+  short_description: "Explain complex ideas simply and rigorously"
+  default_prompt: "Use $feynman to explain this from first principles with a concrete example."

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Fable Advisor"
+  short_description: "Run the original read-only Fable advisor"
+  default_prompt: "Use $fable-advisor for this bounded read-only planning or review task."
+
+policy:
+  allow_implicit_invocation: false

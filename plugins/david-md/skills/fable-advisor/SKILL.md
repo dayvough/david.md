@@ -1,6 +1,6 @@
 ---
 name: fable-advisor
-description: Run Claude Fable as a verified, read-only planning or review advisor through the local Claude Code harness. Use when the user asks for Fable, a Fable plan or review, or an independent Claude second opinion grounded in repository evidence.
+description: Run the original Claude Fable read-only planning and review workflow through the local Claude Code harness. Use only when the user explicitly invokes $fable-advisor or asks for the legacy Fable Advisor workflow. Generic Fable requests belong to $fable.
 ---
 
 # Fable Advisor
