@@ -1,0 +1,4 @@
+interface:
+  display_name: "Customer Research"
+  short_description: "Find evidence-backed customer segments"
+  default_prompt: "Use $customer-research to analyze the customer data I authorize, identify behavior-based segments, and show which founder decisions the evidence supports."
