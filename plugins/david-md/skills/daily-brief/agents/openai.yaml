@@ -1,0 +1,4 @@
+interface:
+  display_name: "Daily Brief"
+  short_description: "Turn scattered work into today’s decisions"
+  default_prompt: "Use $daily-brief to refresh accessible sources, close or park open loops, and choose one focused block for today."

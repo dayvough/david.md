@@ -1,7 +1,7 @@
 {
   "name": "david-md",
-  "version": "0.2.0",
-  "description": "Six skills for clear explanations, product decisions, and model tasks with explicit limits.",
+  "version": "0.3.0",
+  "description": "Eight skills for clear explanations, decisions, research, and bounded model tasks.",
   "author": {
     "name": "David Marquez",
     "url": "https://david.md"
@@ -14,13 +14,15 @@
     "claude-code",
     "fable",
     "explanation",
-    "product-thinking"
+    "product-thinking",
+    "daily-planning",
+    "customer-research"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "David.md",
-    "shortDescription": "Six skills, each with one clear job",
-    "longDescription": "Simplify language, build an explanation from basic facts, sharpen a product decision, or give another model a task with explicit limits.",
+    "shortDescription": "Eight skills, each with one clear job",
+    "longDescription": "Simplify language, explain from basic facts, close open loops, segment customers from evidence, sharpen a product decision, or delegate a bounded model task.",
     "developerName": "David Marquez",
     "category": "Developer Tools",
     "capabilities": [

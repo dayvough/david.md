@@ -1,6 +1,6 @@
 # david.md
 
-Six skills for six jobs. A skill is a folder of instructions that tells an agent how to handle one kind of request.
+Eight skills for eight jobs. A skill is a folder of instructions that tells an agent how to handle one kind of request.
 
 ## Skills
 
@@ -10,10 +10,12 @@ Six skills for six jobs. A skill is a folder of instructions that tells an agent
 - [`$avatar`](plugins/david-md/skills/avatar/SKILL.md) **(WIP)** uses questions from one to three thinkers to examine a founder or product problem, then recommends the smallest useful move.
 - [`$fable`](plugins/david-md/skills/fable/SKILL.md) gives Claude Fable one repository task with explicit limits and records what it did.
 - [`$fable-56-parallel`](plugins/david-md/skills/fable-56-parallel/SKILL.md) asks Fable and GPT-5.6 Sol the same question without letting either change files, then returns both answers without choosing between them.
+- [`$daily-brief`](plugins/david-md/skills/daily-brief/SKILL.md) turns current work across available sources into at most three decisions, a short open-loop list, and one focused block.
+- [`$customer-research`](plugins/david-md/skills/customer-research/SKILL.md) finds evidence-backed customer segments in authorized records and turns them into founder decisions or tests.
 
 ## Install
 
-Install all six as one Codex plugin:
+Install all eight as one Codex plugin:
 
 ```sh
 codex plugin marketplace add dayvough/david.md
