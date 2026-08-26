@@ -25,12 +25,15 @@ Run two independent, read-only advisory passes on one task and return the two an
 ## Parallel workflow
 
 1. Extract the user's task after the skill invocation. Preserve its wording. Add only context strictly required to make the task self-contained, and give that identical payload to both models.
-2. Start the GPT run with `spawn_agent` using:
+2. This skill requires the current Codex session to already be GPT-5.6 Sol
+   with high reasoning. If it is not, stop instead of substituting a model.
+   Start the GPT run with `spawn_agent` using only:
    - `task_name`: `gpt56_high`
-   - `model`: `gpt-5.6-sol`
-   - `reasoning_effort`: `high`
    - `fork_turns`: `none`
-   - prompt: the shared payload plus: `Return only your answer to the task. Do not describe your process. Do not modify files or external state.`
+   - `message`: the shared payload plus: `Return only your answer to the task. Do not describe your process. Do not modify files or external state.`
+
+   The sub-agent inherits the current session's model and reasoning level. Do
+   not pass unsupported `model` or `reasoning_effort` fields.
 3. Immediately start Fable in the task's working directory. Put the shared payload in a temporary prompt file and run:
 
    ```sh

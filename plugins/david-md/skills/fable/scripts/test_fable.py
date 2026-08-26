@@ -668,6 +668,8 @@ class FableTests(unittest.TestCase):
                 "implement",
                 "--allow-exec",
                 "python3 -m unittest -v",
+                "--allow-exec",
+                "git -C . status",
                 "--require-tool",
                 "Edit",
             ],
@@ -725,7 +727,10 @@ class FableTests(unittest.TestCase):
     def test_rejects_destructive_or_chained_exec_permissions(self) -> None:
         for command in (
             "rm example.py",
+            "/bin/rm example.py",
             "git commit -m test",
+            "git -C . reset --hard",
+            "git --no-pager clean -fd",
             "pytest && git status",
             "bash -c pytest",
             "python3 -c print(1)",

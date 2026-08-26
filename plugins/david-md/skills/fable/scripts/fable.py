@@ -127,6 +127,44 @@ FORBIDDEN_EXEC_PREFIXES = (
     ("open",),
 )
 
+READ_ONLY_GIT_SUBCOMMANDS = frozenset(
+    {
+        "blame",
+        "cat-file",
+        "describe",
+        "diff",
+        "diff-files",
+        "diff-index",
+        "diff-tree",
+        "for-each-ref",
+        "grep",
+        "log",
+        "ls-files",
+        "ls-tree",
+        "merge-base",
+        "name-rev",
+        "rev-parse",
+        "shortlog",
+        "show",
+        "show-ref",
+        "status",
+    }
+)
+
+SAFE_GIT_GLOBAL_FLAGS = frozenset(
+    {
+        "--glob-pathspecs",
+        "--icase-pathspecs",
+        "--literal-pathspecs",
+        "--no-pager",
+        "--no-replace-objects",
+        "--noglob-pathspecs",
+        "--paginate",
+        "-P",
+        "-p",
+    }
+)
+
 PROFILE_TOOLS = {
     "linear-read": (
         "mcp__claude_ai_Linear__get_issue",
@@ -201,6 +239,30 @@ def effective_allowed_tools(args: argparse.Namespace) -> list[str]:
     return unique(tools)
 
 
+def validate_git_command(words: tuple[str, ...], command: str) -> None:
+    """Allow only read-only Git subcommands, including after safe global options."""
+    index = 1
+    while index < len(words):
+        word = words[index]
+        if word in SAFE_GIT_GLOBAL_FLAGS:
+            index += 1
+            continue
+        if word == "-C":
+            if index + 1 >= len(words):
+                raise ValueError(f"invalid Git command: {command}")
+            index += 2
+            continue
+        if word.startswith("-C") and len(word) > 2:
+            index += 1
+            continue
+        if word.startswith("-"):
+            raise ValueError(f"unsafe Git global option is not allowed: {command}")
+        if word not in READ_ONLY_GIT_SUBCOMMANDS:
+            raise ValueError(f"destructive Git command is not allowed: {command}")
+        return
+    raise ValueError(f"Git command must name a read-only subcommand: {command}")
+
+
 def validate_exec_permissions(args: argparse.Namespace) -> None:
     if args.allow_exec and args.mode != "implement":
         raise ValueError("--allow-exec requires --mode implement")
@@ -227,8 +289,14 @@ def validate_exec_permissions(args: argparse.Namespace) -> None:
             raise ValueError(f"invalid --allow-exec command {command!r}: {error}") from error
         if not words:
             raise ValueError("--allow-exec commands must contain an executable")
-        if any(words[: len(prefix)] == prefix for prefix in FORBIDDEN_EXEC_PREFIXES):
+        normalized_words = (Path(words[0]).name, *words[1:])
+        if any(
+            normalized_words[: len(prefix)] == prefix
+            for prefix in FORBIDDEN_EXEC_PREFIXES
+        ):
             raise ValueError(f"destructive or release command is not allowed: {command}")
+        if normalized_words[0] == "git":
+            validate_git_command(normalized_words, command)
 
 
 def scope_manifest(args: argparse.Namespace, cwd: Path) -> dict[str, Any]:

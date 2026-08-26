@@ -28,7 +28,7 @@ npx skills@latest add dayvough/david.md --skill feynman --agent codex -g
 
 ## Fable requirements
 
-The two Fable skills require Claude Code, access to Claude Fable, and Python 3.10 or newer. `$fable-56-parallel` also requires a Codex environment that can start another agent and offers `gpt-5.6-sol`.
+The two Fable skills require Claude Code, access to Claude Fable, and Python 3.10 or newer. `$fable-56-parallel` also requires the current Codex session to use GPT-5.6 Sol with high reasoning and support sub-agents.
 
 ## More skills
 
