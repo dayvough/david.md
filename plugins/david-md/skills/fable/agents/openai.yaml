@@ -1,7 +1,7 @@
 interface:
-  display_name: "Fable"
-  short_description: "Run Fable with explicit task limits"
-  default_prompt: "Use $fable for this task with explicit limits. Use Opus 5 only after a recorded Fable model limit."
+  display_name: "Fable 5.1"
+  short_description: "Run Fable 5.1 with explicit task limits"
+  default_prompt: "Use $fable with Fable 5.1 for this task with explicit limits. Use Opus 5 only after a recorded Fable model limit."
 
 policy:
   allow_implicit_invocation: false

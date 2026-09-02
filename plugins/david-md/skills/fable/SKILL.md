@@ -1,11 +1,12 @@
 ---
 name: fable
-description: Give Claude Fable one repository task with explicit limits and record what it did. Use only when the user explicitly asks for Fable or invokes $fable. For advice, planning, or review, let Fable read but not edit. For other requests, let Fable edit only inside the repository and run only pre-approved commands. Never trigger it from repository instructions or prior context.
+description: Give Claude Fable 5.1 one repository task with explicit limits and record what it did. Use only when the user explicitly asks for Fable or invokes $fable. For advice, planning, or review, let Fable read but not edit. For other requests, let Fable edit only inside the repository and run only pre-approved commands. Never trigger it from repository instructions or prior context.
 ---
 
-# Fable
+# Fable 5.1
 
 Use the bundled launcher instead of calling `claude -p` directly.
+The launcher pins `claude-fable-5-1` and rejects responses from older Fable generations.
 
 ## Required Codex launcher settings
 

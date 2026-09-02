@@ -1,9 +1,9 @@
 ---
 name: fable-56-parallel
-description: Ask Claude Fable 5 High and GPT-5.6 Sol High the same read-only question at the same time, then return both complete answers exactly as written. Use only when the user explicitly invokes this skill or asks for both raw responses.
+description: Ask Claude Fable 5.1 High and GPT-5.6 Sol High the same read-only question at the same time, then return both complete answers exactly as written. Use only when the user explicitly invokes this skill or asks for both raw responses.
 ---
 
-# Fable + 5.6 Parallel
+# Fable 5.1 + 5.6 Parallel
 
 Run two independent, read-only advisory passes on one task and return the two answers unchanged.
 
@@ -15,7 +15,7 @@ Run two independent, read-only advisory passes on one task and return the two an
 - Do not summarize, reconcile, rank, critique, quote selectively, or add a recommendation.
 - In the final response, add only these two source headings, in this order:
 
-  `## Fable High`
+  `## Fable 5.1 High`
 
   `## GPT-5.6 Sol High`
 
@@ -37,7 +37,7 @@ Run two independent, read-only advisory passes on one task and return the two an
 3. Immediately start Fable in the task's working directory. Put the shared payload in a temporary prompt file and run:
 
    ```sh
-   claude -p --model fable --effort high --output-format text --permission-mode plan --safe-mode --tools "Read,Grep,Glob" < PROMPT_FILE
+   claude -p --model claude-fable-5-1 --effort high --output-format text --permission-mode plan --safe-mode --tools "Read,Grep,Glob" < PROMPT_FILE
    ```
 
    Capture standard output exactly. If the command fails, capture the exact error output and exit status without interpreting them.

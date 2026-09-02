@@ -184,7 +184,7 @@ PROFILE_TOOLS = {
 }
 
 MODEL_CONFIG = {
-    "fable": ("fable", "claude-fable-5"),
+    "fable": ("claude-fable-5-1", "claude-fable-5-1"),
     "opus-5": ("opus", "claude-opus-5"),
 }
 
@@ -334,7 +334,10 @@ def validate_model_selection(args: argparse.Namespace, cwd: Path) -> None:
             source.get("requested_model") != "fable"
             or not source.get("session_id")
             or not source_models
-            or any(not model.startswith("claude-fable-5") for model in source_models)
+            or any(
+                not model.startswith(MODEL_CONFIG["fable"][1])
+                for model in source_models
+            )
         ):
             raise ValueError(
                 "--fallback-from must be an audit from a verified Fable run"

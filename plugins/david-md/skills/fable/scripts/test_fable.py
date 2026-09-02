@@ -76,7 +76,7 @@ class FableTests(unittest.TestCase):
                         {
                             "session_id": "fable-session",
                             "requested_model": "fable",
-                            "observed_models": ["claude-fable-5"],
+                            "observed_models": ["claude-fable-5-1"],
                             "scope": self.advice_scope(root),
                         }
                     ),
@@ -131,7 +131,7 @@ class FableTests(unittest.TestCase):
             self.assertIn("dontAsk", args)
             self.assertEqual(
                 args[args.index("--model") + 1],
-                "opus" if requested_model == "opus-5" else "fable",
+                "opus" if requested_model == "opus-5" else "claude-fable-5-1",
             )
             builtin_tools = args[args.index("--tools") + 1]
             self.assertIn("Read", builtin_tools)
@@ -188,13 +188,13 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-1",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": ["Read", "ToolSearch"],
                     "mcp_servers": [],
                 },
                 {
                     "type": "assistant",
-                    "message": {"model": "claude-fable-5", "content": []},
+                    "message": {"model": "claude-fable-5-1", "content": []},
                 },
                 {
                     "type": "result",
@@ -212,6 +212,33 @@ class FableTests(unittest.TestCase):
         )
         self.assertEqual(completed.stdout.strip(), "Actual Fable advice")
         self.assertIn("status=success", completed.stderr)
+
+    def test_rejects_fable_5_response(self) -> None:
+        completed = self.run_case(
+            [
+                {
+                    "type": "system",
+                    "subtype": "init",
+                    "session_id": "old-fable-session",
+                    "model": "claude-fable-5",
+                    "tools": [],
+                    "mcp_servers": [],
+                },
+                {
+                    "type": "result",
+                    "subtype": "success",
+                    "is_error": False,
+                    "session_id": "old-fable-session",
+                    "stop_reason": "end_turn",
+                    "terminal_reason": "completed",
+                    "permission_denials": [],
+                    "result": "Wrong Fable generation",
+                },
+            ],
+            4,
+        )
+        self.assertEqual(completed.stdout, "")
+        self.assertIn("status=wrong_model", completed.stderr)
 
     def test_requires_explicit_mode_selection(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -233,7 +260,7 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-2",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": [],
                     "mcp_servers": [],
                 },
@@ -264,7 +291,7 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-auth",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": [],
                     "mcp_servers": [],
                 },
@@ -334,7 +361,7 @@ class FableTests(unittest.TestCase):
                     {
                         "session_id": "fable-session",
                         "requested_model": "fable",
-                        "observed_models": ["claude-fable-5"],
+                        "observed_models": ["claude-fable-5-1"],
                         "scope": self.advice_scope(root),
                     }
                 ),
@@ -449,7 +476,7 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-3",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": [],
                     "mcp_servers": [],
                 },
@@ -476,7 +503,7 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-read-denial",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": ["Read"],
                     "mcp_servers": [],
                 },
@@ -503,7 +530,7 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-4",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": [],
                     "mcp_servers": [],
                 }
@@ -539,7 +566,7 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-no-tool",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": ["Read"],
                     "mcp_servers": [],
                 },
@@ -567,14 +594,14 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-tools",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": ["Glob", "Read"],
                     "mcp_servers": [],
                 },
                 {
                     "type": "assistant",
                     "message": {
-                        "model": "claude-fable-5",
+                        "model": "claude-fable-5-1",
                         "content": [
                             {"type": "tool_use", "name": "Glob"},
                             {"type": "tool_use", "name": "Read"},
@@ -629,14 +656,14 @@ class FableTests(unittest.TestCase):
                     "type": "system",
                     "subtype": "init",
                     "session_id": "session-implement",
-                    "model": "claude-fable-5",
+                    "model": "claude-fable-5-1",
                     "tools": ["Read", "Edit", "Write", "Bash"],
                     "mcp_servers": [],
                 },
                 {
                     "type": "assistant",
                     "message": {
-                        "model": "claude-fable-5",
+                        "model": "claude-fable-5-1",
                         "content": [
                             {
                                 "type": "tool_use",
