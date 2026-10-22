@@ -1,0 +1,4 @@
+interface:
+  display_name: "Decision Diagrams"
+  short_description: "Map a decision as cards that lay themselves out"
+  default_prompt: "Use $decision-diagrams to map this decision as a diagram of options, trade-offs and what was ruled out."

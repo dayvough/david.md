@@ -1,0 +1,4 @@
+interface:
+  display_name: "System Explainers"
+  short_description: "Animate how a system handles one request"
+  default_prompt: "Use $system-explainers to show how this system handles one request as an animated 3D explainer."

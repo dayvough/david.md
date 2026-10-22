@@ -1,6 +1,6 @@
 # david.md
 
-Eight skills for eight jobs. A skill is a folder of instructions that tells an agent how to handle one kind of request.
+Ten skills for ten jobs. A skill is a folder of instructions that tells an agent how to handle one kind of request.
 
 ## Skills
 
@@ -12,10 +12,20 @@ Eight skills for eight jobs. A skill is a folder of instructions that tells an a
 - [`$fable-56-parallel`](plugins/david-md/skills/fable-56-parallel/SKILL.md) asks Fable 5.1 and GPT-5.6 Sol the same question without letting either change files, then returns both answers without choosing between them.
 - [`$daily-brief`](plugins/david-md/skills/daily-brief/SKILL.md) turns current work across available sources into at most three decisions, a short open-loop list, and one focused block.
 - [`$customer-research`](plugins/david-md/skills/customer-research/SKILL.md) finds evidence-backed customer segments in authorized records and turns them into founder decisions or tests.
+- [`$decision-diagrams`](plugins/david-md/skills/decision-diagrams/SKILL.md) maps a decision as a diagram of cards that lay themselves out: options, trade-offs, and what was ruled out and why.
+- [`$system-explainers`](plugins/david-md/skills/system-explainers/SKILL.md) shows how a system handles one request as an animated 3D explainer, with models designed fresh for each system.
+
+<p>
+  <img src="docs/images/decision-diagrams.jpg" alt="$decision-diagrams: a decision about asking for a four-day week, mapped as cards for options that are kept, ruled out, decided, still open, or not explored yet" width="100%">
+</p>
+
+<p>
+  <img src="docs/images/system-explainers.jpg" alt="$system-explainers: a 3D explainer of how a card payment clears, with a card reader, processor, fraud check, card network and bank connected by wires, and a step list beside it" width="100%">
+</p>
 
 ## Install
 
-Install all eight as one Codex plugin:
+Install all ten as one Codex plugin:
 
 ```sh
 codex plugin marketplace add dayvough/david.md
@@ -31,6 +41,10 @@ npx skills@latest add dayvough/david.md --skill feynman --agent codex -g
 ## Fable requirements
 
 The two Fable skills require Claude Code 2.1.250 or newer, access to Claude Fable 5.1, and Python 3.10 or newer. `$fable-56-parallel` also requires the current Codex session to use GPT-5.6 Sol with high reasoning and support sub-agents.
+
+## Diagram requirements
+
+`$decision-diagrams` and `$system-explainers` produce one HTML page that loads its layout or 3D engine from a CDN, so the browser needs network access. `$system-explainers` keeps its engine in `assets/explainer-kit.js` beside the page, so open it through a local server rather than `file://`.
 
 ## More skills
 
