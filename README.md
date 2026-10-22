@@ -15,6 +15,14 @@ Ten skills for ten jobs. A skill is a folder of instructions that tells an agent
 - [`$decision-diagrams`](plugins/david-md/skills/decision-diagrams/SKILL.md) maps a decision as a diagram of cards that lay themselves out: options, trade-offs, and what was ruled out and why.
 - [`$system-explainers`](plugins/david-md/skills/system-explainers/SKILL.md) shows how a system handles one request as an animated 3D explainer, with models designed fresh for each system.
 
+<p>
+  <img src="docs/images/decision-diagrams.jpg" alt="$decision-diagrams: a decision about asking for a four-day week, mapped as cards for options that are kept, ruled out, decided, still open, or not explored yet" width="100%">
+</p>
+
+<p>
+  <img src="docs/images/system-explainers.jpg" alt="$system-explainers: a 3D explainer of how a card payment clears, with a card reader, processor, fraud check, card network and bank connected by wires, and a step list beside it" width="100%">
+</p>
+
 ## Install
 
 Install all ten as one Codex plugin:
