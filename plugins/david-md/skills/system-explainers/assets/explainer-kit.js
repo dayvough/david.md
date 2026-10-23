@@ -21,7 +21,7 @@ const CSS = `:root {
   --line: #cec0ad; --line-soft: #e2d7c7; --navy: #18213d; --ink: #4f535b; --muted: #696d74;
   --faint: #ada293; --teal: #1aa3a1; --teal-soft: #d7ece6; --amber: #e8962e; --green: #2f9e5b;
   --red: #d64a3a; --trace: #d3bea3; --track: #e3d8ca; --code-bg: #f8f0e3; --pill: #18213d; --pill-ink: #f9f2e5;
-  --grid: #d9c7ae; --floor-shadow: #7a5532; --floor-shadow-a: .4;
+  --grid: #d9c7ae; --floor-shadow: #7a5532; --floor-shadow-a: .4; --ink-line: #141a2c;
   --sans: "Barlow", system-ui, sans-serif; --cond: "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, monospace;
   color-scheme: light;
@@ -32,7 +32,7 @@ const CSS = `:root {
     --line: #34405b; --line-soft: #283249; --navy: #efe6d6; --ink: #c3c6cf; --muted: #9a9fab;
     --faint: #6d7486; --teal: #2bbcb9; --teal-soft: #173a3d; --amber: #f2a93a; --green: #45c27a;
     --red: #ef6a5a; --trace: #2c3650; --track: #283249; --code-bg: #151b2b; --pill: #efe6d6; --pill-ink: #121828;
-    --grid: #2a3550; --floor-shadow: #000000; --floor-shadow-a: .5;
+    --grid: #2a3550; --floor-shadow: #000000; --floor-shadow-a: .5; --ink-line: #0b0f1a;
     color-scheme: dark;
   }
 }
@@ -41,7 +41,7 @@ const CSS = `:root {
   --line: #34405b; --line-soft: #283249; --navy: #efe6d6; --ink: #c3c6cf; --muted: #9a9fab;
   --faint: #6d7486; --teal: #2bbcb9; --teal-soft: #173a3d; --amber: #f2a93a; --green: #45c27a;
   --red: #ef6a5a; --trace: #2c3650; --track: #283249; --code-bg: #151b2b; --pill: #efe6d6; --pill-ink: #121828;
-  --grid: #2a3550; --floor-shadow: #000000; --floor-shadow-a: .5;
+  --grid: #2a3550; --floor-shadow: #000000; --floor-shadow-a: .5; --ink-line: #0b0f1a;
   color-scheme: dark;
 }
 
@@ -149,7 +149,13 @@ button { font: inherit; color: inherit; }
   .callout span { font-size: 12px; } .hint { display: none; } .player { bottom: 12px; }
   .seg-label { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { .callout, .tag { transition: none; } }`;
+@media (prefers-reduced-motion: reduce) { .callout, .tag { transition: none; } }
+
+.themes { position: absolute; top: 26px; right: 22px; z-index: 3; display: flex; gap: 6px; padding: 5px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; }
+.themes button { width: 22px; height: 22px; border-radius: 50%; border: 1px solid var(--line); cursor: pointer; padding: 0;
+  background: radial-gradient(circle at 50% 50%, var(--sa) 0 32%, var(--sw) 34%); }
+.themes button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--card), 0 0 0 3.5px var(--teal); }
+@media (max-width: 900px) { .themes { top: auto; bottom: 62px; right: 50%; transform: translateX(50%); } }`;
 
 const NO_INK = 1; // layer for floor, shadow and rings: drawn, but never outlined
 const DEG = Math.PI / 180;
@@ -579,6 +585,26 @@ export const PARTS = {
   },
 };
 
+/* ---------- Colour themes ----------
+   Each theme is a full token set for the page plus the floor grid, shadow and ink line.
+   Pick one with mountExplainer({ theme }) or ?theme= in the URL; 'auto' follows the system
+   (paper by day, blue at night). The models keep their own colours in every theme. */
+const T = (bg, deep, card, line, lineSoft, text, ink, muted, faint, accent, accentSoft, amber, green, red, trace, codeBg, pill, pillInk, grid, shadow, shadowA, inkLine, scheme) =>
+  ({ bg, 'bg-deep': deep, card, 'card-soft': card + 'f2', line, 'line-soft': lineSoft, navy: text, ink, muted, faint, teal: accent,
+     'teal-soft': accentSoft, amber, green, red, trace, track: lineSoft, 'code-bg': codeBg, pill, 'pill-ink': pillInk, grid,
+     'floor-shadow': shadow, 'floor-shadow-a': shadowA, 'ink-line': inkLine, scheme });
+export const THEMES = {
+  blue: { label: 'Blue', ...T('#121828', '#0e1320', '#1a2134', '#34405b', '#283249', '#efe6d6', '#c3c6cf', '#9a9fab', '#6d7486', '#2bbcb9', '#173a3d', '#f2a93a', '#45c27a', '#ef6a5a', '#2c3650', '#151b2b', '#efe6d6', '#121828', '#2a3550', '#000000', .5, '#0b0f1a', 'dark') },
+  paper: { label: 'Paper', ...T('#f6eddd', '#efe3d1', '#f9f2e5', '#cec0ad', '#e2d7c7', '#18213d', '#4f535b', '#696d74', '#ada293', '#1aa3a1', '#d7ece6', '#e8962e', '#2f9e5b', '#d64a3a', '#d3bea3', '#f8f0e3', '#18213d', '#f9f2e5', '#d9c7ae', '#7a5532', .4, '#141a2c', 'light') },
+  blueprint: { label: 'Blueprint', ...T('#1d4f91', '#194683', '#235aa3', '#5f8cc9', '#3d6fb3', '#f4f8ff', '#d6e4f7', '#a9c2e4', '#7fa1cf', '#ffd24a', '#2f6ab4', '#ffb347', '#7ee2a8', '#ff8a7a', '#4f80c2', '#1f528f', '#ffd24a', '#14325e', '#6a98d6', '#0a2a55', .45, '#0d2a52', 'dark') },
+  forest: { label: 'Forest', ...T('#12231d', '#0e1c17', '#1a3029', '#2f4d43', '#233c34', '#eaf2ec', '#c6d6cc', '#93aa9c', '#66806f', '#4fd1a0', '#1d4436', '#f2b84a', '#6fdc8c', '#f07a62', '#284439', '#15291f', '#eaf2ec', '#12231d', '#2b4a3e', '#000000', .5, '#07120e', 'dark') },
+  plum: { label: 'Plum', ...T('#1e1526', '#18101f', '#2a1e35', '#46355a', '#352844', '#f4ecf7', '#d6c9de', '#a593b2', '#7a6889', '#ff7eb0', '#4a2440', '#ffc15e', '#7fdca0', '#ff7a6b', '#3d2d4d', '#22182c', '#ff7eb0', '#1e1526', '#3e2f50', '#000000', .5, '#0d0712', 'dark') },
+  sand: { label: 'Sand', ...T('#f3e4d3', '#ead6c0', '#f8ecdf', '#d3b89c', '#e5d0ba', '#3a2418', '#5e4a3e', '#7c675a', '#b39a85', '#c8553d', '#f1d2c6', '#d98a2b', '#4f8f4a', '#c0392b', '#d8bc9e', '#f5e6d6', '#3a2418', '#f8ecdf', '#dcc1a3', '#6b3d1f', .38, '#2a160c', 'light') },
+  graphite: { label: 'Graphite', ...T('#171717', '#121212', '#202020', '#3a3a3a', '#2b2b2b', '#f2f2f2', '#cfcfcf', '#9a9a9a', '#6b6b6b', '#f2a93a', '#3a2e1a', '#f2c94a', '#6fcf97', '#eb5757', '#2e2e2e', '#1b1b1b', '#f2a93a', '#171717', '#303030', '#000000', .55, '#050505', 'dark') },
+};
+const THEME_CSS = Object.entries(THEMES).map(([k, t]) =>
+  `:root[data-palette="${k}"]{${Object.entries(t).filter(([n]) => !['label', 'scheme'].includes(n)).map(([n, v]) => `--${n}:${v}`).join(';')};color-scheme:${t.scheme}}`).join('');
+
 /* ---------- Icons for callouts (28x28 strokes) ---------- */
 export const ICONS = {
   laptop: '<rect x="5" y="6" width="18" height="12" rx="1.5"/><path d="M2.5 22h23l-2-4h-19z"/>',
@@ -601,7 +627,12 @@ export const ICONS = {
 /* ---------- Mount: DOM, renderer, scene, story ---------- */
 export { THREE };
 export function mountExplainer(cfg) {
-  const style = document.createElement('style'); style.textContent = CSS; document.head.append(style);
+  const style = document.createElement('style'); style.textContent = CSS + THEME_CSS; document.head.append(style);
+  // theme: ?theme= wins, then the viewer's last pick, then the scene's choice, then blue
+  let saved = null; try { saved = localStorage.getItem('explainer-theme'); } catch (e) {}
+  const want = new URLSearchParams(location.search).get('theme') || saved || cfg.theme || 'blue';
+  const setPalette = (k) => { if (THEMES[k]) document.documentElement.dataset.palette = k; else delete document.documentElement.dataset.palette; };
+  setPalette(want);
   const $ = (s) => root.querySelector(s);
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   const root = document.createElement('div');
@@ -619,6 +650,8 @@ export function mountExplainer(cfg) {
       <span class="brand-rule"></span>
       <div><h1>${cfg.brand || 'System Explainers'}</h1><p>See <i>·</i> Trace <i>·</i> Understand</p></div>
     </header>
+    ${cfg.themePicker === false ? '' : `<div class="themes" role="group" aria-label="Colour theme">${Object.entries(THEMES).map(([k, t]) =>
+      `<button data-k="${k}" title="${t.label}" aria-label="${t.label} theme" style="--sw:${t.bg};--sa:${t.teal}"></button>`).join('')}</div>`}
     <p class="hint">Drag to turn · Scroll to zoom</p>
     <div class="player" role="toolbar" aria-label="Playback">
       <button class="prev" title="Previous step" aria-label="Previous step"><svg viewBox="0 0 24 24"><path d="M15 5.5 8.5 12l6.5 6.5"/></svg></button>
@@ -689,11 +722,17 @@ export function mountExplainer(cfg) {
   function applyTheme() {
     gridMat.uniforms.color.value.set(css('--grid'));
     shadowMat.color.set(css('--floor-shadow')); shadowMat.opacity = +css('--floor-shadow-a');
-    ink.mat.uniforms.lineColor.value.set(isDark() ? '#0b0f1a' : '#141a2c');
+    ink.mat.uniforms.lineColor.value.set(css('--ink-line') || (isDark() ? '#0b0f1a' : '#141a2c'));
+    root.querySelectorAll('.themes button').forEach((b) => b.setAttribute('aria-pressed', b.dataset.k === document.documentElement.dataset.palette));
     renderer.shadowMap.needsUpdate = true; dirty = true;
   }
   matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
-  new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-palette'] });
+  root.querySelector('.themes')?.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    setPalette(b.dataset.k);
+    try { localStorage.setItem('explainer-theme', b.dataset.k); } catch (err) {}
+  });
 
   /* nodes */
   const parts = { ...PARTS, ...(cfg.parts || {}) };
