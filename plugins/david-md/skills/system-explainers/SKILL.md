@@ -5,8 +5,8 @@ description: Show how a software system or one of its subsystems works as an ani
 
 # System explainers
 
-A published page where a system is a little isometric diorama (cream paper, flat toon colours,
-navy ink outlines) and one request plays through it step by step: packets ride wires between
+A published page where a system is a little isometric diorama (a colour theme, blue by default,
+with flat toon colours and dark ink outlines) and one request plays through it step by step: packets ride wires between
 parts, parts react, callout cards explain, a trace panel logs each hop, and a toggle flips the
 outcome. The page shell is fixed and designed. Your job is the scope, the story, new models for this system, and the `mountExplainer` block.
 
@@ -61,8 +61,8 @@ and handles, `torus(r, t, color, arc)`, `extrude([[x, y], …], depth, color)` f
 `group.userData.lights = [leds]` to get `blink`. `THREE` is exported for anything else.
 
 The kit's built-in `PARTS` (laptop, gateway, server, db, cards, signpost, balancer, cache, queue)
-are only a fallback when the person asks for them. Hand-pick colours per system too; keep the
-cream paper, navy ink and teal callouts, which are the house style.
+are only a fallback when the person asks for them. Hand-pick model colours per system too; the page
+colours come from the theme (below), so models must read on both dark and light themes.
 
 Place parts with `at: [x, z]` on the floor, roughly x −85…75 (flow left to right) and z −40…60,
 30+ apart, with no long wires crossing. A node: `{ part, opts, at, rotate, title, icon, body, offset }`.
@@ -96,6 +96,13 @@ that file into the folder where you write the page, then:
 - **Local only**: serve the folder with `python3 -m http.server` and open the page from
   `http://localhost`. Browsers block module imports from `file://`, so a server is needed.
 
+**Theme.** Set `theme` in `mountExplainer`: `'blue'` (default, dark navy), `'paper'` (cream),
+`'blueprint'`, `'forest'`, `'plum'`, `'sand'`, `'graphite'`, or `'auto'` (paper by day, blue at
+night). Use blue unless the person asks for another or wants to compare; to try one, add
+`?theme=forest` to the URL. The page shows a swatch row so viewers can switch live (their pick is
+remembered); `themePicker: false` hides it. Never restyle the page by hand; ask for a new theme in
+the kit instead.
+
 For a series, one page per scene. Never edit the engine, restyle the cards, or add DOM.
 
 Before publishing: every part was designed for this system; every `send` has a wire; no callout covers the part it explains; every step
@@ -113,7 +120,7 @@ ends with a log line; the toggle changes something visible.
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Semi+Condensed:wght@500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>html, body { background: #f6eddd; } @media (prefers-color-scheme: dark) { html:not([data-theme="light"]), html:not([data-theme="light"]) body { background: #121828; } }</style>
+<style>html, body { background: #121828; }</style>
 <script type="importmap">
 { "imports": {
   "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
@@ -186,6 +193,7 @@ const parts = {
 
 mountExplainer({
   title: 'How a card payment clears',
+  theme: 'blue',
   intro: 'Ada taps her card for a €42 coffee order. In about two seconds five machines agree whether the money exists. Press play to follow it.',
   partsLine: 'Five machines, one tap',
   parts,
