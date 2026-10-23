@@ -1,7 +1,7 @@
 {
   "name": "david-md",
-  "version": "0.4.0",
-  "description": "Ten skills for clear explanations, decisions, diagrams, research, and bounded model tasks.",
+  "version": "0.5.0",
+  "description": "Eleven skills for clear explanations, decisions, diagrams, research, and bounded model tasks.",
   "author": {
     "name": "David Marquez",
     "url": "https://david.md"
@@ -23,8 +23,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "David.md",
-    "shortDescription": "Ten skills, each with one clear job",
-    "longDescription": "Simplify language, explain from basic facts, close open loops, segment customers from evidence, sharpen a product decision, map a decision as a diagram, animate how a system works, or delegate a bounded model task.",
+    "shortDescription": "Eleven skills, each with one clear job",
+    "longDescription": "Simplify language, explain from basic facts, close open loops, segment customers from evidence, sharpen a product decision, draw how a system fits together, map a decision as a diagram, animate how a system works, or delegate a bounded model task.",
     "developerName": "David Marquez",
     "category": "Developer Tools",
     "capabilities": [

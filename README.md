@@ -1,6 +1,6 @@
 # david.md
 
-Ten skills for ten jobs. A skill is a folder of instructions that tells an agent how to handle one kind of request.
+Eleven skills for eleven jobs. A skill is a folder of instructions that tells an agent how to handle one kind of request.
 
 ## Skills
 
@@ -12,8 +12,13 @@ Ten skills for ten jobs. A skill is a folder of instructions that tells an agent
 - [`$fable-56-parallel`](plugins/david-md/skills/fable-56-parallel/SKILL.md) asks Fable 5.1 and GPT-5.6 Sol the same question without letting either change files, then returns both answers without choosing between them.
 - [`$daily-brief`](plugins/david-md/skills/daily-brief/SKILL.md) turns current work across available sources into at most three decisions, a short open-loop list, and one focused block.
 - [`$customer-research`](plugins/david-md/skills/customer-research/SKILL.md) finds evidence-backed customer segments in authorized records and turns them into founder decisions or tests.
+- [`$diagrams`](plugins/david-md/skills/diagrams/SKILL.md) draws how something fits together (systems, data maps, workflows, networks) as cards and lines that lay themselves out, with groups, line kinds, domain filters and up to three views.
 - [`$decision-diagrams`](plugins/david-md/skills/decision-diagrams/SKILL.md) maps a decision as a diagram of cards that lay themselves out: options, trade-offs, and what was ruled out and why.
 - [`$system-explainers`](plugins/david-md/skills/system-explainers/SKILL.md) shows how a system handles one request as an animated 3D explainer, with models designed fresh for each system.
+
+<p>
+  <img src="docs/images/diagrams.jpg" alt="$diagrams: how an order moves through a bookshop, with a storefront, orders, accounts, payments, fraud check, stock, pick and pack, and a planned returns service, joined by coloured lines for calls, money, events and people" width="100%">
+</p>
 
 <p>
   <img src="docs/images/decision-diagrams.jpg" alt="$decision-diagrams: a decision about asking for a four-day week, mapped as cards for options that are kept, ruled out, decided, still open, or not explored yet" width="100%">
@@ -25,7 +30,7 @@ Ten skills for ten jobs. A skill is a folder of instructions that tells an agent
 
 ## Install
 
-Install all ten as one Codex plugin:
+Install all eleven as one Codex plugin:
 
 ```sh
 codex plugin marketplace add dayvough/david.md
@@ -44,7 +49,7 @@ The two Fable skills require Claude Code 2.1.250 or newer, access to Claude Fabl
 
 ## Diagram requirements
 
-`$decision-diagrams` and `$system-explainers` produce one HTML page that loads its layout or 3D engine from a CDN, so the browser needs network access. `$system-explainers` keeps its engine in `assets/explainer-kit.js` beside the page, so open it through a local server rather than `file://`.
+`$diagrams`, `$decision-diagrams` and `$system-explainers` produce one HTML page that loads its layout or 3D engine from a CDN, so the browser needs network access. `$system-explainers` keeps its engine in `assets/explainer-kit.js` beside the page, so open it through a local server rather than `file://`.
 
 ## More skills
 

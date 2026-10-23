@@ -1,0 +1,4 @@
+interface:
+  display_name: "Diagrams"
+  short_description: "Draw how something fits together as cards that lay themselves out"
+  default_prompt: "Use $diagrams to draw how this system fits together as a diagram of cards and lines."
